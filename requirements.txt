@@ -1,0 +1,6 @@
+gspread==5.4.0
+numpy==1.21.5
+openpyxl==3.0.9
+pandas==1.4.2
+SQLAlchemy==1.4.32
+streamlit==1.12.0
