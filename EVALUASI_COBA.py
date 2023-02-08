@@ -44,7 +44,7 @@ def get_data():
     
     #data.rename(columns = data_nama, inplace =True)
     #data.drop([0,1],axis = 0,inplace = True)   
-    data = data.loc[data['Tipe Penilai'] != 'Atasan'] # filter atasan di hide aja
+    #data = data.loc[data['Tipe Penilai'] != 'Atasan'] # filter atasan di hide aja
     data['NIK Penilai'] = data['NIK Penilai'].fillna(0).astype('str')
     data['NIK Penilai'] = data['NIK Penilai'].str.split('.', expand = True)[0]
     
@@ -1491,7 +1491,7 @@ with c2:
             
         
         # question for chief 
-        elif 'Chief' in search_2.split('*')[5]:
+        elif 'Chief' in search_2.split('*')[5] or 'Director' in search_2.split('*')[5]:
             st.title('Evaluasi Kompetensi untuk Chief Officer')
             st.markdown('')
             st.markdown('')
@@ -1694,9 +1694,9 @@ with c2:
         st.caption('Sudah otomatis')
         
         ## end submit
-        b3 = st.form_submit_button('Submit Form Penilaian 👈')
-        if not b3:
-            st.warning('Submit Form Penilaian dulu ya, sebelum ke tahap akhir & jika anda belum yakin silahkan untuk menilai lagi ya!')
+        b3 = st.form_submit_button('')
+        #if not b3:
+        #    st.warning('Submit Form Penilaian dulu ya, sebelum ke tahap akhir & jika anda belum yakin silahkan untuk menilai lagi ya!')
         
     
 
