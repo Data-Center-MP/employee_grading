@@ -32,7 +32,7 @@ import streamlit as st
 # make a cache for efficieny 
 
 
-@st.cache
+#@st.cache
 def get_data():
     data = pd.read_csv(r"https://docs.google.com/spreadsheets/d/e/2PACX-1vRXwzVHhY4kZ9kfcgSleJN2gugToAF7bU5J4YfYp9y1mRICQcxVK07j6s0wFc_XgRZ4C0rWolQWyLYL/pub?gid=528915107&single=true&output=csv")
     #data_nama = {'Unnamed: 1':'Evaluator',
