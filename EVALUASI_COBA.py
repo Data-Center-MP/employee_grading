@@ -1706,7 +1706,7 @@ with c2:
         ## TO CONNECT TO GSHEET WITH GCP API 
 
         # CONNECT WITH API 
-        gc = gspread.service_account(filename="mp-evaluator-359610-b73f5a8737fb_sl.json")
+        gc = gspread.service_account(filename="mp-evaluator-359610-b73f5a8737fb.json")
 
         # OPEN data output
         sh = gc.open_by_key("1xNy6XktUGcUEZJj3EMGTFa9gFIQ0JyrTOZ8zpb5eKBU")
