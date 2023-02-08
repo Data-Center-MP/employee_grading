@@ -31,7 +31,6 @@ import streamlit as st
 # get from sheet data input auto
 # make a cache for efficieny 
 
-
 #@st.cache
 def get_data():
     data = pd.read_csv(r"https://docs.google.com/spreadsheets/d/e/2PACX-1vRXwzVHhY4kZ9kfcgSleJN2gugToAF7bU5J4YfYp9y1mRICQcxVK07j6s0wFc_XgRZ4C0rWolQWyLYL/pub?gid=528915107&single=true&output=csv")
@@ -44,7 +43,7 @@ def get_data():
     
     #data.rename(columns = data_nama, inplace =True)
     #data.drop([0,1],axis = 0,inplace = True)   
-    #data = data.loc[data['Tipe Penilai'] != 'Atasan'] # filter atasan di hide aja
+    data = data.loc[data['Tipe Penilai'] != 'Atasan'] # filter atasan di hide aja
     data['NIK Penilai'] = data['NIK Penilai'].fillna(0).astype('str')
     data['NIK Penilai'] = data['NIK Penilai'].str.split('.', expand = True)[0]
     
@@ -122,9 +121,9 @@ with c1:
         
         # nama evaluator moment 
         st.header('1. Nama Penilai')
-        search_1 = st.selectbox('Cari nama penilai di sini ya!',
-                              tuple(data['Nama Penilai'].unique()),
-                              help = 'Nama penilai disini ya')
+        search_1 = st.selectbox('Cari nama penilai di sini ya!', 
+                                list(data['Nama Penilai'].unique()),
+                                help = 'Nama penilai disini ya')
         st.caption('Nama harus sesuai')
         
         
@@ -178,15 +177,9 @@ with c1:
     with st.form('form_77'):
         st.header('2. Nama Yang Akan Dinilai')
         
-        
-        ### ini rencara ke 1
-        #search_2 = st.selectbox('Pilih Nama Yang Akan Dinilai',
-        #                        tuple(nama_yang_dinilai(search_1)),
-        #                        help = 'Nama Yang akan di nilai disini ya')
-        
         ## pilih nama yang akan dinilai
         search_2 = st.selectbox('Pilih Nama Yang Akan Dinilai',
-                                tuple(nama_yang_dinilai(st.session_state['cari_1'])),
+                                list(nama_yang_dinilai(st.session_state['cari_1'])),
                                 help = 'Nama Yang akan di nilai disini ya')
         
         # CTA SUBMIT NAMA 
@@ -209,7 +202,7 @@ with c1:
         st.markdown('')
         
         # COPYRIGHT 
-        st.caption("<h6 style='text-align: center;'>© 2022 Copyright by Mega Perintis. All Rights Reserved.</h6>", unsafe_allow_html=True)
+        st.caption("<h6 style='text-align: center;'>© 2023 Copyright by Mega Perintis. All Rights Reserved.</h6>", unsafe_allow_html=True)
         
     
 
@@ -1691,25 +1684,8 @@ with c2:
         ########################### 
         
         ## ini nanti 
-        st.caption('Sudah otomatis')
-        
-        ## end submit
-        b3 = st.form_submit_button('')
-        #if not b3:
-        #    st.warning('Submit Form Penilaian dulu ya, sebelum ke tahap akhir & jika anda belum yakin silahkan untuk menilai lagi ya!')
-        
-    
+        # st.caption('Sudah otomatis')
 
-c11, c12 = st.columns([1.5, 20]) # for horizontal form 
-
-### output ending moment '
-
-###########################
-##### OUTPUT ENDING MOMENT #####
-###########################
-
-with c12:
-    with st.form('form_3'):      
         st.header('Hasil Penilaian anda')
         
         # DETAIL NYA
@@ -1726,42 +1702,37 @@ with c12:
         b5 = st.checkbox('⚠️ apakah anda yakin?', help = 'klik ini untuk menyimpan')
         st.caption('wajib di klik untuk menyimpan')
         
-        # cta save 
+        
+        ## TO CONNECT TO GSHEET WITH GCP API 
+
+        # CONNECT WITH API 
+        gc = gspread.service_account(filename="mp-evaluator-359610-b73f5a8737fb_sl.json")
+
+        # OPEN data output
+        sh = gc.open_by_key("1xNy6XktUGcUEZJj3EMGTFa9gFIQ0JyrTOZ8zpb5eKBU")
+        # select sheet 
+        worksheet = sh.worksheet('RESPON_2')
+        #### conenct api end 
+
+        ## to submit and save to gsheet 
+        # c91, c92 = st.columns([1.5, 20])
+        
         b4 = st.form_submit_button('Submit dan save 💾', help = 'pastikan tombol checkbox yang di atas di klik untuk menyimpan')
 
-        
-        
-        
-###########################
-##### GCP API & SAVE #####
-###########################
+        if b4 and b5:
+            # with c92:
+                # FIRST UPDATE WITH NEW FORMAT 
+            with st.spinner('Mohon Bersabar sedang loading'):
+                time.sleep(random.choice([2,3,4]))
+            worksheet.update([to_df.columns.values.tolist()] + to_df.values.tolist()) # < this for update new format
+            #worksheet.append_rows(to_df.values.tolist()) # this for append while clik submit 
+
+            st.success('Selamat Penilaian anda berhasil tersimpan, Terima kasih atas penilaian anda', icon="✅")
+
+                # cta save 
+                
 
 
-## TO CONNECT TO GSHEET WITH GCP API 
-
-# CONNECT WITH API 
-gc = gspread.service_account(filename="mp-evaluator-359610-b73f5a8737fb.json")
-
-# OPEN data output
-sh = gc.open_by_key("1xNy6XktUGcUEZJj3EMGTFa9gFIQ0JyrTOZ8zpb5eKBU")
-# select sheet 
-worksheet = sh.worksheet('RESPON_2')
-#### conenct api end 
-
-## to submit and save to gsheet 
-c91, c92 = st.columns([1.5, 20])
-
-if b4 and b5:
-    with c92:
-        # FIRST UPDATE WITH NEW FORMAT 
-        with st.spinner('Mohon Bersabar sedang loading'):
-            time.sleep(random.choice([2,3,4]))
-        #worksheet.update([to_df.columns.values.tolist()] + to_df.values.tolist()) # < this for update new format
-        worksheet.append_rows(to_df.values.tolist()) # this for append while clik submit 
-        
-        st.success('Selamat Penilaian anda berhasil tersimpan, Terima kasih atas penilaian anda', icon="✅")
-        #st.balloons()
-    
 
 ## matikan streamlit nya
 hide_menu_style = """
