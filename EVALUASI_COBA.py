@@ -1724,8 +1724,8 @@ with c2:
                 # FIRST UPDATE WITH NEW FORMAT 
             with st.spinner('Mohon Bersabar sedang loading'):
                 time.sleep(random.choice([2,3,4]))
-            worksheet.update([to_df.columns.values.tolist()] + to_df.values.tolist()) # < this for update new format
-            #worksheet.append_rows(to_df.values.tolist()) # this for append while clik submit 
+            #worksheet.update([to_df.columns.values.tolist()] + to_df.values.tolist()) # < this for update new format
+            worksheet.append_rows(to_df.values.tolist()) # this for append while clik submit 
 
             st.success('Selamat Penilaian anda berhasil tersimpan, Terima kasih atas penilaian anda', icon="✅")
 
