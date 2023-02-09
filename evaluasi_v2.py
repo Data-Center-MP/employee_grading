@@ -42,7 +42,7 @@ def get_data():
     data['NIK Penilai'] = data['NIK Penilai'].fillna(0).astype('str')
     data['NIK Penilai'] = data['NIK Penilai'].str.split('.', expand = True)[0]
     
-    data['Tipe Penilai'] = data['Tipe Penilai'].str.replace('-', ' ')..str.title()
+    data['Tipe Penilai'] = data['Tipe Penilai'].str.replace('-', ' ').str.title()
     data['Penilai'] = '*' + data['Nama Penilai'] + '* nik *' + data['NIK Penilai'] + '*'
     
     # yang lama 
