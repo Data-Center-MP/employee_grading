@@ -34,24 +34,16 @@ import streamlit as st
 #@st.cache
 def get_data():
     data = pd.read_csv(r"https://docs.google.com/spreadsheets/d/e/2PACX-1vRXwzVHhY4kZ9kfcgSleJN2gugToAF7bU5J4YfYp9y1mRICQcxVK07j6s0wFc_XgRZ4C0rWolQWyLYL/pub?gid=528915107&single=true&output=csv")
-    #data_nama = {'Unnamed: 1':'Evaluator',
-    #                     'Unnamed: 2':'Nama yang akan dinilai',
-    #                     "Unnamed: 3":'Leadership Level',
-    #                     'Unnamed: 4':'Division',
-    #                     'Unnamed: 5':'Link Penilaian',
-    #                     'Unnamed: 6':'Hubungan',}
     
-    #data.rename(columns = data_nama, inplace =True)
     #data.drop([0,1],axis = 0,inplace = True)   
     data = data.loc[data['Tipe Penilai'] != 'Atasan'] # filter atasan di hide aja
+    data['Level'] = data['Level'].str.title()     
+    
     data['NIK Penilai'] = data['NIK Penilai'].fillna(0).astype('str')
     data['NIK Penilai'] = data['NIK Penilai'].str.split('.', expand = True)[0]
     
-    data['Tipe Penilai'] = data['Tipe Penilai'].str.replace('-', ' ')
+    data['Tipe Penilai'] = data['Tipe Penilai'].str.replace('-', ' ')..str.title()
     data['Penilai'] = '*' + data['Nama Penilai'] + '* nik *' + data['NIK Penilai'] + '*'
-    
-    # data default 
-    #data['gak ada'] = 'none'
     
     # yang lama 
     #data['Nama Karyawan Yang Dinilai'] = 'Nama yang akan di nilai *' + data['Nama Karyawan'] + "* NIK *" + data['NIK'].astype('str') + "* posisi *" + data['Posisi'] + "* sebagai *" + data['Posisi'] + '* level *' + data['Level'] + '* dari' + ' Division *' + data['Divisi'] +  '* dan Hubungan nya *' + data['Tipe Penilai'] + '*'
@@ -160,10 +152,12 @@ with c1:
         if b1 and korek_nik == search_1:
             st.write('Nama Penilai ***' + search_1 + '*** & ' + 'NIK ***' + str(nik_eval) + '***')
             st.success('Succes login, selamat menilai!', icon="✅")
+            st.caption('abaikan jika sudah login')
+            
             st.session_state['cari_1'] = search_1
                 
         elif b1 and korek_nik != search_1:
-            st.error("⚠️ NIK tidak di sesuai, tolong masukan NIK dengan benar, ya")     
+            st.error("⚠️ NIK tidak di sesuai, tolong masukan NIK dengan benar, ya")   
           
         else:
             st.info('NIK harus sesuai dengan penilai & harus angka')
@@ -1697,8 +1691,7 @@ with c2:
         # store to dataframe
         to_df = pd.DataFrame([save_data])
         st.dataframe(to_df[['Time Stamp', 'Nama Penilai', 'NIK Nama Penilai', 'Nama Yang Akan Dinilai', 'Detail']])
-        st.markdown('Note: di atas ini adalah format detail data hasil penilaian & data langsung tersimpan di database, jika sudah submit')
-        
+        st.caption('di atas ini adalah format detail data hasil penilaian & data langsung tersimpan di database, jika sudah submit')
         b5 = st.checkbox('⚠️ apakah anda yakin?', help = 'klik ini untuk menyimpan')
         st.caption('wajib di klik untuk menyimpan')
         

@@ -1,1 +1,1 @@
-web: sh setup.sh && streamlit run EVALUASI_COBA.py
+web: sh setup.sh && streamlit run evaluasi_v2.py
