@@ -1684,8 +1684,23 @@ with c2:
         ########################### 
         
         ## ini nanti 
-        # st.caption('Sudah otomatis')
+        st.caption('Sudah otomatis')
 
+        ## end submit
+        b3 = st.form_submit_button('Submit Form Penilaian 👈', disabled = True)
+        #if not b3:
+        #    st.warning('Submit Form Penilaian dulu ya, sebelum ke tahap akhir & jika anda belum yakin silahkan untuk menilai lagi ya!')
+
+c11, c12 = st.columns([1.5, 20]) # for horizontal form 
+
+### output ending moment '
+
+###########################
+##### OUTPUT ENDING MOMENT #####
+###########################
+
+with c12:
+    with st.form('form_3'):      
         st.header('Hasil Penilaian anda')
         
         # DETAIL NYA
@@ -1702,37 +1717,42 @@ with c2:
         b5 = st.checkbox('⚠️ apakah anda yakin?', help = 'klik ini untuk menyimpan')
         st.caption('wajib di klik untuk menyimpan')
         
-        
-        ## TO CONNECT TO GSHEET WITH GCP API 
-
-        # CONNECT WITH API 
-        gc = gspread.service_account(filename="mp-evaluator-359610-b73f5a8737fb.json")
-
-        # OPEN data output
-        sh = gc.open_by_key("1xNy6XktUGcUEZJj3EMGTFa9gFIQ0JyrTOZ8zpb5eKBU")
-        # select sheet 
-        worksheet = sh.worksheet('RESPON_2')
-        #### conenct api end 
-
-        ## to submit and save to gsheet 
-        # c91, c92 = st.columns([1.5, 20])
-        
+        # cta save 
         b4 = st.form_submit_button('Submit dan save 💾', help = 'pastikan tombol checkbox yang di atas di klik untuk menyimpan')
 
-        if b4 and b5:
-            # with c92:
-                # FIRST UPDATE WITH NEW FORMAT 
-            with st.spinner('Mohon Bersabar sedang loading'):
-                time.sleep(random.choice([2,3,4]))
-            #worksheet.update([to_df.columns.values.tolist()] + to_df.values.tolist()) # < this for update new format
-            worksheet.append_rows(to_df.values.tolist()) # this for append while clik submit 
-
-            st.success('Selamat Penilaian anda berhasil tersimpan, Terima kasih atas penilaian anda', icon="✅")
-
-                # cta save 
-                
+        
+        
+        
+###########################
+##### GCP API & SAVE #####
+###########################
 
 
+## TO CONNECT TO GSHEET WITH GCP API 
+
+# CONNECT WITH API 
+gc = gspread.service_account(filename="SALES/mp-evaluator-359610-b73f5a8737fb_sl.json")
+
+# OPEN data output
+sh = gc.open_by_key("1xNy6XktUGcUEZJj3EMGTFa9gFIQ0JyrTOZ8zpb5eKBU")
+# select sheet 
+worksheet = sh.worksheet('RESPON_2')
+#### conenct api end 
+
+## to submit and save to gsheet 
+c91, c92 = st.columns([1.5, 20])
+
+if b4 and b5:
+    with c92:
+        # FIRST UPDATE WITH NEW FORMAT 
+        with st.spinner('Mohon Bersabar sedang loading'):
+            time.sleep(random.choice([2,3,4]))
+        worksheet.update([to_df.columns.values.tolist()] + to_df.values.tolist()) # < this for update new format
+        #worksheet.append_rows(to_df.values.tolist()) # this for append while clik submit 
+        
+        st.success('Selamat Penilaian anda berhasil tersimpan, Terima kasih atas penilaian anda', icon="✅")
+        #st.balloons()
+    
 
 ## matikan streamlit nya
 hide_menu_style = """
