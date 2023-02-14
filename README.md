@@ -3,7 +3,7 @@ Employee Grading
 
 
 ## upper rank 
-- `evaluasi_v2_atasan.py` <--- on production
+### - `evaluasi_v2_atasan.py` <--- on production
 feature
 
 - new_source
@@ -13,12 +13,12 @@ feature
 <br>
 
 ## lower rank 
-- `evaluasi_v1.py` <--- on production
+### - `evaluasi_v1.py` <--- on production
 update feature
 
 - new_source 
 
-- `evaluasi_v2.py` <--- on going
+### - `evaluasi_v2.py` <--- on going
 update feature
 
 - fixing bug
