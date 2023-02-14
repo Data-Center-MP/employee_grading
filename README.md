@@ -32,5 +32,9 @@ update feature
 
 - output data = `https://docs.google.com/spreadsheets/d/e/2PACX-1vQLLcjSqGEpJqEkZCQSpbAB770THjfe7f6VIC6ucuHIfQjVe2sNnt08cqp4dDdEipYgaODEb_7GKdpa/pub?gid=392304708&single=true&output=csv    
 `
-  
-    
+
+## link source
+
+~http://108.137.80.249:8501~ <--- lower rank
+~http://108.137.80.249:8502~ <--- upper rank
+   
