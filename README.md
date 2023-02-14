@@ -2,7 +2,7 @@
 Employee Grading
 
 
-## upper rank 
+## - upper rank 
 ### - `evaluasi_v2_atasan.py` <--- on production
 feature
 
@@ -12,7 +12,7 @@ feature
 
 <br>
 
-## lower rank 
+## - lower rank 
 ### - `evaluasi_v1.py` <--- on production
 update feature
 
