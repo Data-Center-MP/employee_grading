@@ -51,11 +51,9 @@ def get_data():
 
 # data respon hanya untuk atasan
 def get_data_latest():
-    data = pd.read_csv('https://docs.google.com/spreadsheets/d/e/2PACX-1vQLLcjSqGEpJqEkZCQSpbAB770THjfe7f6VIC6ucuHIfQjVe2sNnt08cqp4dDdEipYgaODEb_7GKdpa/pub?gid=0&single=true&output=csv')    
-    data = data.drop(['Jabatan', 'Level', 'Divisi', 'Hubungan', 'Detail'], axis = 1)  
-    data = data[data['Tanggung Jawab Pribadi'].isin(['1', '2', '3', '4', '5'])]
+    data = pd.read_csv('https://docs.google.com/spreadsheets/d/e/2PACX-1vQLLcjSqGEpJqEkZCQSpbAB770THjfe7f6VIC6ucuHIfQjVe2sNnt08cqp4dDdEipYgaODEb_7GKdpa/pub?gid=392304708&single=true&output=csv')    
+    data = data.drop(['Leadership Level', 'Detail', 'NIK Nama Penilai'], axis = 1)  
     return data
-
 
 # get data moment end 
 
@@ -1698,11 +1696,11 @@ with c2:
             
         # store to dataframe
         st.caption(f'berikut hasil penilaian dari rekan - rekan **{st.session_state["cari_1"]}**')
-        #to_df = pd.DataFrame([save_data])
+        to_df = pd.DataFrame([save_data])
         #st.dataframe(to_df[['Time Stamp', 'Nama Penilai', 'NIK Nama Penilai', 'Nama Yang Akan Dinilai', 'Detail']])
         
         # get latest respon # only for atasan
-        show_df = data_latest[data_latest['Nama Yang Akan Dinilai'] == st.session_state['cari_1']].drop_duplicates(subset = 'Nama Penilai').fillna('None').reset_index(drop = True)
+        show_df = data_latest[data_latest['Nama Yang Akan Dinilai'] == search_2.split('*')[1]].drop_duplicates(subset = 'Nama Penilai').fillna('None').reset_index(drop = True)
         st.dataframe(show_df)
         
         #st.caption('di atas ini adalah format detail data hasil penilaian & data langsung tersimpan di database, jika sudah submit')
