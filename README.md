@@ -3,7 +3,7 @@ Employee Grading
 
 
 ## upper rank 
-- **evaluasi_v2_atasan.py** <--- on production
+- `evaluasi_v2_atasan.py` <--- on production
 feature
 -- new_source
 -- fixing bugs
@@ -12,11 +12,11 @@ feature
 <br>
 
 ## lower rank 
-- ** evaluasi_v1.py ** <--- on production
+- `evaluasi_v1.py` <--- on production
 update feature
 -- new_source 
 
-- ** evaluasi_v2.py ** <--- on going
+- `evaluasi_v2.py` <--- on going
 update feature
 -- fixing bug
 
@@ -27,7 +27,7 @@ update feature
 `
 
 
-- outpu data = `https://docs.google.com/spreadsheets/d/e/2PACX-1vQLLcjSqGEpJqEkZCQSpbAB770THjfe7f6VIC6ucuHIfQjVe2sNnt08cqp4dDdEipYgaODEb_7GKdpa/pub?gid=392304708&single=true&output=csv    
+- output data = `https://docs.google.com/spreadsheets/d/e/2PACX-1vQLLcjSqGEpJqEkZCQSpbAB770THjfe7f6VIC6ucuHIfQjVe2sNnt08cqp4dDdEipYgaODEb_7GKdpa/pub?gid=392304708&single=true&output=csv    
 `
   
     
