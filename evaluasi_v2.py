@@ -36,7 +36,7 @@ def get_data():
     data = pd.read_csv(r"https://docs.google.com/spreadsheets/d/e/2PACX-1vRXwzVHhY4kZ9kfcgSleJN2gugToAF7bU5J4YfYp9y1mRICQcxVK07j6s0wFc_XgRZ4C0rWolQWyLYL/pub?gid=528915107&single=true&output=csv")
     
     #data.drop([0,1],axis = 0,inplace = True)   
-    data = data.loc[(data['Tipe Penilai'] != 'Atasan') & (data['keterangan'] == 'Atasan')] # filter atasan di hide aja
+    data = data.loc[(data['Tipe Penilai'] != 'Atasan') & (data['keterangan'] != 'yes')] # filter atasan di hide aja
     data['Level'] = data['Level'].str.title()     
     
     data['NIK Penilai'] = data['NIK Penilai'].fillna(0).astype('str')
