@@ -1710,7 +1710,7 @@ with c2:
         ## to submit and save to gsheet 
         # c91, c92 = st.columns([1.5, 20])
         
-        b4 = st.form_submit_button('Submit dan save 💾', help = 'pastikan tombol checkbox yang di atas di klik untuk menyimpan')
+        b4 = st.form_submit_button('Submit dan save 💾', help = 'hanya 1 kali klik, pastikan tombol checkbox yang di atas di klik untuk menyimpan')
 
         if b4 and b5:
             # with c92:
